@@ -10,7 +10,6 @@ const router = Router();
 const { API_KEY } = process.env;
 const linkApi = `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`;
 // Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 //FUNCION PARA TRAER LOS DATOS DE LA API Y LA DB
 async function infoDogs() {
     const response = await axios.get(linkApi);
