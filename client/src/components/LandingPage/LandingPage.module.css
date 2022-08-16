@@ -1,0 +1,7 @@
+.container {
+    background-image: url(../../img/landing_dogs.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 600px;
+    width: 100%;
+}
