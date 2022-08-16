@@ -1,7 +1,59 @@
 .container {
     background-image: url(../../img/landing_dogs.jpg);
+    display: flex;
     background-position: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-size: cover;
-    height: 600px;
+    height: 900px;
     width: 100%;
+}
+
+.info {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    height: 400px;
+    width: 70%;
+    align-items: center;
+    background-image: linear-gradient(white, rgba(215, 196, 196, 0.187));
+    border-radius: 20px;
+    opacity: 0;
+}
+
+.info:hover{
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+}
+
+#boton_home {
+    opacity: 1;
+    background-color: black;
+}
+
+h1 {
+    font-size: 80px;
+    font-style: normal;
+    font-weight: bolder;
+    font-family: Arial;
+    letter-spacing: 10px;
+}
+
+p{
+    font-size: 40px;
+    font-family: Arial;
+}
+
+.github{
+    height: 60%;
+}
+
+.navLandingPage{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 100px;
 }
