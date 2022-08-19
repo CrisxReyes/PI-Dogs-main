@@ -1,13 +1,9 @@
+import axios from 'axios';
 const GET_ALL_DOGS = 'GET_ALL_DOGS';
 
 export function getAllDogs() {
-    return function(dispatch){
-     fetch("localhost:3001/temperaments")
-        .then(response => response.json())
-     fetch("localhost:3001/dogs")
-        .then(response => response.json())
-        .then(json => {
-            dispatch({ type: GET_ALL_DOGS, payload: json });
-        });
-    }
+    return async function(dispatch){
+        var json = await axios.get("http://localhost:3001/dogs");
+        return dispatch({ type: GET_ALL_DOGS, payload: json.data });
+    }    
 }
