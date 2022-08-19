@@ -10,7 +10,7 @@ export default function Home(){
 
     useEffect(() => {
         dispatch(getAllDogs());
-    },[])
+    },[dispatch])
     
     function handleClick(e){
         e.preventDefault();
@@ -33,7 +33,9 @@ export default function Home(){
                 </select>
                 {
                     allDogs && allDogs.map(d => {
-                         <DogCard name={d.name} image={d.image} height={d.height}/>
+                        return(
+                         <DogCard name={d.name} height={d.height}/>
+                        );
                     })
                 }
             </div>
