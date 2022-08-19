@@ -15,7 +15,7 @@ async function infoDogs() {
     const response = await axios.get(linkApi);
         const cleanAPI = response.data.map(dog => {
             return {id: dog.id,
-                    image: dog.image, 
+                    image: dog.image.url, 
                     name: dog.name, 
                     temperament: dog.temperament, 
                     weight: dog.weight.metric,
