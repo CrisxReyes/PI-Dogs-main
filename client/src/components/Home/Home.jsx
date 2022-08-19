@@ -7,6 +7,11 @@ import DogCard from '../DogCard/DogCard';
 export default function Home(){
     const dispatch = useDispatch();
     const allDogs = useSelector((state) => state.dogsLoaded);
+    //estados locales para paginado 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dogsPerPage, setDogsPerPage] = useState(8);
+    const indexOfLastDog = currentPage * setDogsPerPage; //indice del ultimo dog 
+    const indexOfFirstDog = indexOfLastDog - dogsPerPage; 
 
     useEffect(() => {
         dispatch(getAllDogs());
@@ -34,7 +39,7 @@ export default function Home(){
                 {
                     allDogs && allDogs.map(d => {
                         return(
-                         <DogCard name={d.name} height={d.height}/>
+                         <DogCard name={d.name} height={d.height} image={d.image}/>
                         );
                     })
                 }
