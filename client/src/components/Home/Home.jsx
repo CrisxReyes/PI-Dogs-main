@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDogs } from '../../actions';
 import DogCard from '../DogCard/DogCard';
+import Paginado from '../Paginado/Paginado';
 
 export default function Home(){
     const dispatch = useDispatch();
@@ -10,8 +11,13 @@ export default function Home(){
     //estados locales para paginado 
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage, setDogsPerPage] = useState(8);
-    const indexOfLastDog = currentPage * setDogsPerPage; //indice del ultimo dog 
+    const indexOfLastDog = currentPage * dogsPerPage; //indice del ultimo dog 
     const indexOfFirstDog = indexOfLastDog - dogsPerPage; 
+    const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog); //divide el array de dogs en el numero de dogs por pagina
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
 
     useEffect(() => {
         dispatch(getAllDogs());
@@ -36,8 +42,9 @@ export default function Home(){
                     <option value='created'>Creadas</option>
                     <option value='api'>Existentes</option>
                 </select>
+                <Paginado dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginado={paginado} />
                 {
-                    allDogs && allDogs.map(d => {
+                    currentDogs && currentDogs.map(d => {
                         return(
                          <DogCard name={d.name} height={d.height} image={d.image}/>
                         );
