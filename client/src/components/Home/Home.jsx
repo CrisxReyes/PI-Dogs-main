@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllDogs } from '../../actions';
 import DogCard from '../DogCard/DogCard';
 import Paginado from '../Paginado/Paginado';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Home(){
     const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export default function Home(){
                     <option value='created'>Creadas</option>
                     <option value='api'>Existentes</option>
                 </select>
+                <SearchBar/>
                 <Paginado dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginado={paginado} />
                 {
                     currentDogs && currentDogs.map(d => {
