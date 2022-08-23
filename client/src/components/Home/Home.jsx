@@ -40,7 +40,7 @@ export default function Home(){
                 </select>
                 <select>
                     <option value='all'>Todas</option>
-                    <option value='created'>Creadas</option>
+                    <option value='created'>Agregadas</option>
                     <option value='api'>Existentes</option>
                 </select>
                 <SearchBar/>
