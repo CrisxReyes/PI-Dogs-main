@@ -48,7 +48,11 @@ export default function Home(){
                 </select>
                 <select>
                     {
-                        temperaments && temperaments.map(t => (
+                        temperaments && temperaments.sort((a,b)=> {
+                            if(a.name === b.name) return 0;
+                            if(a.name < b.name) return -1;
+                            if(a.name > b.name) return 1;
+                        }).map(t => (
                             <option value={t.name} key={t.id}>{t.name}</option>
                         ))
                     }
