@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDogs } from '../../actions';
+import { getAllDogs, getTemperaments } from '../../actions';
 import DogCard from '../DogCard/DogCard';
 import Paginado from '../Paginado/Paginado';
 import SearchBar from '../SearchBar/SearchBar';
@@ -9,6 +9,8 @@ import SearchBar from '../SearchBar/SearchBar';
 export default function Home(){
     const dispatch = useDispatch();
     const allDogs = useSelector((state) => state.dogsLoaded);
+    const temperaments = useSelector((state) => state.temperaments);
+    //console.log(temperaments);
     //estados locales para paginado 
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage, setDogsPerPage] = useState(8);
@@ -21,6 +23,7 @@ export default function Home(){
     }
 
     useEffect(() => {
+        dispatch(getTemperaments());
         dispatch(getAllDogs());
     },[dispatch])
     
@@ -43,12 +46,19 @@ export default function Home(){
                     <option value='created'>Agregadas</option>
                     <option value='api'>Existentes</option>
                 </select>
+                <select>
+                    {
+                        temperaments && temperaments.map(t => (
+                            <option value={t.name} key={t.id}>{t.name}</option>
+                        ))
+                    }
+                </select>
                 <SearchBar/>
-                <Paginado dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginado={paginado} />
+                <Paginado dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginado={paginado}/>
                 {
                     currentDogs && currentDogs.map(d => {
                         return(
-                         <DogCard name={d.name} height={d.height} image={d.image}/>
+                         <DogCard key={d.id} name={d.name} height={d.height} image={d.image}/>
                         );
                     })
                 }

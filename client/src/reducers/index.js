@@ -18,7 +18,7 @@ function rootReducer(state = initialState, action) {
         case 'GET_TEMPERAMENTS':
             return{
                 ...state,
-                temperemants: action.payload
+                temperaments: action.payload
             }
         default:
             return state;
