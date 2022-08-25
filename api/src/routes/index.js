@@ -66,7 +66,7 @@ router.get('/dogs/:idRaza', async(req, res) => {
     } );
 
         if (findId.length > 0) {
-            res.json(findId);
+            res.json(findId[0]);
         } else {
             res.status(404).json({ error: "Id not found" });
         }
