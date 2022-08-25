@@ -47,6 +47,10 @@ export default function Home(){
                     <option value='api'>Existentes</option>
                 </select>
                 <select>
+                    <option value="0-100">0-100</option>
+                    <option value="100-0">100-0</option>
+                </select>
+                <select>
                     {
                         temperaments && temperaments.sort((a,b)=> {
                             if(a.name === b.name) return 0;
@@ -62,7 +66,7 @@ export default function Home(){
                 {
                     currentDogs && currentDogs.map(d => {
                         return(
-                         <DogCard key={d.id} name={d.name} height={d.height} image={d.image}/>
+                         <DogCard key={d.id} name={d.name} height={d.height} image={d.image} temperament={d.temperament}/>
                         );
                     })
                 }
