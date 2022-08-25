@@ -66,7 +66,7 @@ export default function Home(){
                 {
                     currentDogs && currentDogs.map(d => {
                         return(
-                         <DogCard key={d.id} name={d.name} height={d.height} image={d.image} temperament={d.temperament}/>
+                         <DogCard key={d.id} name={d.name} height={d.height} image={d.image} temperament={d.temperament} id={d.id}/>
                         );
                     })
                 }
