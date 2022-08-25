@@ -1,6 +1,7 @@
 const initialState = {
     dogsLoaded: [],
-    temperaments: []
+    temperaments: [],
+    dogDetails: {}
 }
 
 function rootReducer(state = initialState, action) {
@@ -19,6 +20,11 @@ function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 temperaments: action.payload
+            }
+        case 'GET_DETAILS':
+            return {
+                ...state,
+                dogDetails: action.payload
             }
         default:
             return state;
