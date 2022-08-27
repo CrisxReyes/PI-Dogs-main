@@ -18,6 +18,31 @@ export default function Home(){
     const indexOfFirstDog = indexOfLastDog - dogsPerPage; 
     const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog); //divide el array de dogs en el numero de dogs por pagina
 
+    //ESTADOS PARA FILTROS
+    const [sources, setSources] = useState('all');
+    const [byTemper, setByTemper] = useState('all');
+    //ESTADOS PARA ORDENAR 
+    const [alphabetical, setAlphabetical] = useState('asc');
+    const [weights, setWeights] = useState('asc');
+    //FUNCIONES PARA ORDENAR Y FILTRAR
+    function handleClickAlphabetical(e) {
+        setAlphabetical(e.target.value);
+        if(alphabetical === 'asc') {
+            allDogs && allDogs.sort((a,b)=> {
+                if(a.name === b.name) return 0;
+                if(a.name < b.name) return -1;
+                if(a.name > b.name) return 1;
+            })
+        }
+        if(alphabetical === 'desc') {
+            allDogs && allDogs.sort((a,b)=> {
+                if(a.name === b.name) return 0;
+                if(a.name < b.name) return 1;
+                if(a.name > b.name) return -1;
+            })
+        }
+    }
+
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
@@ -37,7 +62,7 @@ export default function Home(){
             <h1>LISTA DE RAZAS</h1>
             <button onClick={e => {handleClick(e)}}>Cargar datos de razas</button>
             <div>
-                <select>
+                <select onClick={e => {handleClickAlphabetical(e)}}>
                     <option value='asc'>A-Z</option>
                     <option value='desc'>Z-A</option>
                 </select>
@@ -47,10 +72,11 @@ export default function Home(){
                     <option value='api'>Existentes</option>
                 </select>
                 <select>
-                    <option value="0-100">0-100</option>
-                    <option value="100-0">100-0</option>
+                    <option value="asc">0-100</option>
+                    <option value="desc">100-0</option>
                 </select>
                 <select>
+                    <option value="all">Todas</option>
                     {
                         temperaments && temperaments.sort((a,b)=> {
                             if(a.name === b.name) return 0;
