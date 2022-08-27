@@ -22,11 +22,10 @@ export default function Home(){
     const [sources, setSources] = useState('all');
     const [byTemper, setByTemper] = useState('all');
     //ESTADOS PARA ORDENAR 
-    const [alphabetical, setAlphabetical] = useState('asc');
+    const [alphabetical, setAlphabetical] = useState('');
     const [weights, setWeights] = useState('asc');
     //FUNCIONES PARA ORDENAR Y FILTRAR
-    function handleClickAlphabetical(e) {
-        setAlphabetical(e.target.value);
+    function orderByName(alphabetical) {
         if(alphabetical === 'asc') {
             allDogs && allDogs.sort((a,b)=> {
                 if(a.name === b.name) return 0;
@@ -40,7 +39,14 @@ export default function Home(){
                 if(a.name < b.name) return 1;
                 if(a.name > b.name) return -1;
             })
-        }
+        }    
+    }
+    function handleClickAlphabetical(e) {
+        e.preventDefault();
+        setAlphabetical(e.target.value);
+        console.log(alphabetical);
+        orderByName(alphabetical);
+        setCurrentPage(1);
     }
 
     const paginado = (pageNumber) => {
@@ -62,7 +68,10 @@ export default function Home(){
             <h1>LISTA DE RAZAS</h1>
             <button onClick={e => {handleClick(e)}}>Cargar datos de razas</button>
             <div>
-                <select onClick={e => {handleClickAlphabetical(e)}}>
+                <select defaultValue='ALP' onChange={e => handleClickAlphabetical(e) }>
+                    <option value='ALP' disabled>
+                        Alphabetical order
+                    </option>
                     <option value='asc'>A-Z</option>
                     <option value='desc'>Z-A</option>
                 </select>
