@@ -1,16 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDogs, getTemperaments } from '../../actions';
+import { getAllDogs, getTemperaments, orderByName } from '../../actions';
 import DogCard from '../DogCard/DogCard';
 import Paginado from '../Paginado/Paginado';
 import SearchBar from '../SearchBar/SearchBar';
 
 export default function Home(){
     const dispatch = useDispatch();
-    const allDogs = useSelector((state) => state.dogsLoaded);
+    const allDogs = useSelector((state) => state.dogsFiltered);
     const temperaments = useSelector((state) => state.temperaments);
-    //console.log(temperaments);
+    
     //estados locales para paginado 
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage, setDogsPerPage] = useState(8);
@@ -22,30 +22,12 @@ export default function Home(){
     const [sources, setSources] = useState('all');
     const [byTemper, setByTemper] = useState('all');
     //ESTADOS PARA ORDENAR 
-    const [alphabetical, setAlphabetical] = useState('');
     const [weights, setWeights] = useState('asc');
-    //FUNCIONES PARA ORDENAR Y FILTRAR
-    function orderByName(alphabetical) {
-        if(alphabetical === 'asc') {
-            allDogs && allDogs.sort((a,b)=> {
-                if(a.name === b.name) return 0;
-                if(a.name < b.name) return -1;
-                if(a.name > b.name) return 1;
-            })
-        }
-        if(alphabetical === 'desc') {
-            allDogs && allDogs.sort((a,b)=> {
-                if(a.name === b.name) return 0;
-                if(a.name < b.name) return 1;
-                if(a.name > b.name) return -1;
-            })
-        }    
-    }
+
     function handleClickAlphabetical(e) {
         e.preventDefault();
-        setAlphabetical(e.target.value);
-        console.log(alphabetical);
-        orderByName(alphabetical);
+        console.log(e.target.value);
+        dispatch(orderByName(e.target.value));
         setCurrentPage(1);
     }
 

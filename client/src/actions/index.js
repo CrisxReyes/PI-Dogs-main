@@ -3,6 +3,7 @@ const GET_ALL_DOGS = 'GET_ALL_DOGS';
 const GET_DOGS_BY_NAME = 'GET_DOGS_BY_NAME';
 const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 const GET_DETAILS = 'GET_DETAILS';
+const ORDER_BY_NAME = 'ORDER_BY_NAME';
 
 export function getAllDogs() {
     return async function(dispatch){
@@ -30,4 +31,8 @@ export function getDetails(id) {
         var json = await axios.get(`http://localhost:3001/dogs/${id}`);
         return dispatch({ type: GET_DETAILS, payload: json.data });
     }
+}
+
+export function orderByName(option){
+    return { type: ORDER_BY_NAME, payload: option };
 }
